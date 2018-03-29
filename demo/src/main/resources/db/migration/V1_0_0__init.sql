@@ -1,0 +1,11 @@
+CREATE TABLE rate(
+    id BIGINT PRIMARY KEY NOT NULL,
+    name VARCHAR(50),
+    code VARCHAR(50),
+    rate NUMERIC
+);
+
+CREATE TABLE init(
+    id BIGINT PRIMARY KEY NOT NULL,
+    name VARCHAR(20)
+);

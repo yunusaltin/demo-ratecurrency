@@ -1,0 +1,14 @@
+environments:
+    api:
+        url: https://bitpay.com/api/rates
+server:
+  port: 9000
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/postgres
+    username: postgres
+    password: password
+  jpa:
+    generate-ddl: true
+  flyway:
+    baseline-on-migrate: true
