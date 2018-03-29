@@ -21,5 +21,11 @@ pipeline {
                 }
             }
         }
+        stage('Deliver') { 
+            steps {
+                sh 'mvn install dockerfile:build' 
+                sh 'docker-compose up'
+            }
+        }
     }
 }
