@@ -34,9 +34,16 @@ public class RateLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        cleanDatabase();
         List<Rate> rates = loadFromAPI();
         log.info(rates.toString());
         saveRates(rates);
+    }
+
+
+    private void cleanDatabase() {
+        log.info("Cleaning table rate of database");
+        rateRepository.deleteAll();
     }
 
 
