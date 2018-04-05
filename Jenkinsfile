@@ -21,14 +21,9 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') { 
+        stage('Build Image') { 
             steps {
                 sh 'mvn install dockerfile:build'
-            }
-            post {
-                always {
-                    sh 'docker-compose up'
-                }
             }
         }
     }
