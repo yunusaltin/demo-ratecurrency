@@ -4,14 +4,12 @@ package be.coincurrency;
 import be.coincurrency.controller.RateController;
 import be.coincurrency.model.Rate;
 import be.coincurrency.repository.RateRepository;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 
 import java.util.Optional;
 
 import static org.hamcrest.core.Is.is;
-import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -26,7 +24,7 @@ public class RateControllerTest {
     private RateRepository rateRepository;
 
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         initMocks(this);
         subject = new RateController(rateRepository);
