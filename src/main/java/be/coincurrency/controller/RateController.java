@@ -2,6 +2,8 @@ package be.coincurrency.controller;
 
 import be.coincurrency.repository.RateRepository;
 import be.coincurrency.model.Rate;
+import be.coincurrency.services.RateService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,16 +15,17 @@ import java.util.stream.Collectors;
 
 @RestController
 public class RateController {
-    private RateRepository rateRepository;
+    private RateService rateService;
 
-    public RateController(RateRepository rateRepository) {
-        this.rateRepository = rateRepository;
+    @Autowired
+    public RateController(RateService rateService) {
+        this.rateService = rateService;
     }
 
     @GetMapping("/")
     @CrossOrigin(origins = "http://localhost:4200")
     public Collection<Rate> allRates() {
-        return rateRepository.findAll().stream().collect(Collectors.toList());
+        return rateService.getRates();
     }
 
 
@@ -37,7 +40,7 @@ public class RateController {
     @GetMapping("/{code}")
     public String  getRateByCode(@PathVariable("code") String code)
     {
-        Optional<Rate> foundRate = rateRepository.findByCodeContainingIgnoreCase(code);
+        Optional<Rate> foundRate = rateService.getRateByCode(code);
         return foundRate
                 .map(rate -> String.format("1 BTC = %s %s", rate.getRate(),rate.getName()) )
                 .orElse(String.format("Couldn't find rate for %s", code));

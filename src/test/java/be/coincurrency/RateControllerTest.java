@@ -4,6 +4,7 @@ package be.coincurrency;
 import be.coincurrency.controller.RateController;
 import be.coincurrency.model.Rate;
 import be.coincurrency.repository.RateRepository;
+import be.coincurrency.services.RateService;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 
@@ -21,19 +22,19 @@ public class RateControllerTest {
     private RateController subject;
 
     @Mock
-    private RateRepository rateRepository;
+    private RateService rateService;
 
 
     @BeforeEach
     public void setUp() throws Exception {
         initMocks(this);
-        subject = new RateController(rateRepository);
+        subject = new RateController(rateService);
     }
 
     @Test
     public void shouldReturnCurrency() throws Exception {
         Rate rate = new Rate("Euro", "EUR", 1.0);
-        given(rateRepository.findByCodeContainingIgnoreCase("EUR")).willReturn(Optional.of(rate));
+        given(rateService.getRateByCode("EUR")).willReturn(Optional.of(rate));
 
         String conversion = subject.getRateByCode("EUR");
 
@@ -42,7 +43,7 @@ public class RateControllerTest {
 
     @Test
     public void shouldTellIfRateIsUnknown() throws Exception {
-        given(rateRepository.findByCodeContainingIgnoreCase(anyString())).willReturn(Optional.empty());
+        given(rateService.getRateByCode(anyString())).willReturn(Optional.empty());
 
         String conversion = subject.getRateByCode("EUR");
 
