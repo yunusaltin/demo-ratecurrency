@@ -7,6 +7,7 @@ import be.coincurrency.repository.RateRepository;
 import be.coincurrency.services.RateService;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
@@ -16,6 +17,8 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import static org.junit.Assert.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 public class RateControllerTest {
 
