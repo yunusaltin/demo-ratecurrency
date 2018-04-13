@@ -1,1 +1,2 @@
 # demo-ratecurrency
+test project
